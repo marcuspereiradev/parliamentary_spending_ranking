@@ -1,0 +1,14 @@
+<section class="container">
+  <div class="container-import">
+    <h1>Importar um relatório</h1>
+    <%= form_with url: csv_import_path, class: "import-form" do |f| %>
+      <div class="import-form__input">
+        <%= f.file_field :csv %>
+      </div>
+      <div class="import-form__btn">
+        <span>Permitido apenas arquivos CSV</span>
+        <%= f.submit :Enviar %>
+      </div>
+    <% end %>
+  </div>
+</section>
