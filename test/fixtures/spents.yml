@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deputy: one
+  ideCadastro: MyString
+  vlrLiquido: 1.5
+  datEmissao: MyString
+
+two:
+  deputy: two
+  ideCadastro: MyString
+  vlrLiquido: 1.5
+  datEmissao: MyString
