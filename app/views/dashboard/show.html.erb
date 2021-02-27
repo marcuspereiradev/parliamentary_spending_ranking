@@ -1,0 +1,31 @@
+<section class="container">
+  <div class="dashboard-show">
+    <%= image_tag(@deputy.avatar, alt: @deputy.txNomeParlamentar) %>
+    <div class="dashboard-show__info">
+      <strong><%= @deputy.txNomeParlamentar %></strong>
+      <div class="dashboard-show__info-spent">
+        <div>
+          <span>Total de gastos</span>
+          <span>$</span>
+        </div>
+        <p><%= number_to_currency_br(@deputy.spents.sum(:vlrLiquido)) %></p>
+      </div>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <th>Fornecedor</th>
+      <th>Valor Líquido</th>
+      <th>Data de Emissão</th>
+      <th>Documento Fiscal</th>
+    </tr>
+    <% @deputy.spents.each do |item| %>
+      <tr>
+        <td><%= item.txtFornecedor %></td>
+        <td><%= item.vlrLiquido %></td>
+        <td><%= item.datEmissao %></td>
+        <td><%= link_to  "Nota Fiscal", item.urlDocumento, target: :_blank %></td>
+      </tr>
+    <% end %>
+  </table>
+</section>
