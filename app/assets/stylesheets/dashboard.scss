@@ -21,6 +21,15 @@
     padding: 24px;
     text-decoration: none;
     transition: 0.3s;
+    box-shadow: 0 2px 2px #888888;
+
+    &:nth-child(even) {
+      animation: right_to_left 1s;
+    }
+
+    &:nth-child(odd) {
+      animation: left_to_right 1s;
+    }
 
     & + a {
       margin-top: 16px;
@@ -67,17 +76,6 @@
     animation: left_to_right 1s;
   }
 
-  @keyframes left_to_right {
-    from {
-      opacity: 0;
-      transform: translateX(-200px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
   .dashboard-show__info {
     display: flex;
     flex-direction: column;
@@ -119,17 +117,6 @@
   }
 }
 
-@keyframes right_to_left {
-  from {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -145,6 +132,30 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #ffffff;
+}
+
+// keyframes
+
+@keyframes left_to_right {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes right_to_left {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes down_to_top {

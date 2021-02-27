@@ -20,6 +20,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 60px 100px;
+    animation: right_to_left 1s;
 
     .import-form__input {
       align-self: center;
@@ -54,5 +55,16 @@
         }
       }
     }
+  }
+}
+
+@keyframes right_to_left {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
