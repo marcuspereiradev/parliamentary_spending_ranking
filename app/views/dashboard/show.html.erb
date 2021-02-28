@@ -20,7 +20,7 @@
       <th>Documento Fiscal</th>
     </tr>
     <% @deputy.spents.each do |item| %>
-      <tr>
+      <tr class="<%= 'biggest--value' if item.vlrLiquido == @deputy.spents.pluck(:vlrLiquido).max %>">
         <td><%= item.txtFornecedor %></td>
         <td><%= number_to_currency_br(item.vlrLiquido) %></td>
         <td><%= item.datEmissao %></td>

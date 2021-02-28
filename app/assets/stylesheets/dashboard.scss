@@ -126,16 +126,21 @@ table {
   width: 100%;
   margin-top: 60px;
   animation: down_to_top 1s;
-}
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
+  .biggest--value {
+    background: #ee1c1c;
+    color: #ffffff;
+  }
 
-tr:nth-child(even) {
-  background-color: #ffffff;
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
 }
 
 // keyframes
