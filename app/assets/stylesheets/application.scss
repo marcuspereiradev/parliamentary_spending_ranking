@@ -44,3 +44,19 @@ body, input, button {
   max-width: 1199.98px;
   width: 100%;
 }
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: -1px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+
+  img {
+    max-width: 30px;
+  }
+}
