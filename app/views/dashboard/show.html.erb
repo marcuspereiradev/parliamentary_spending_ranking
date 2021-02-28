@@ -22,7 +22,7 @@
     <% @deputy.spents.each do |item| %>
       <tr>
         <td><%= item.txtFornecedor %></td>
-        <td><%= item.vlrLiquido %></td>
+        <td><%= number_to_currency_br(item.vlrLiquido) %></td>
         <td><%= item.datEmissao %></td>
         <td><%= link_to  "Nota Fiscal", item.urlDocumento, target: :_blank %></td>
       </tr>
