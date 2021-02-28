@@ -9,6 +9,7 @@
           <span>$</span>
         </div>
         <p><%= number_to_currency_br(@deputy.spents.sum(:vlrLiquido)) %></p>
+        <span class="dashboard__biggest-spent">Maior despesa do candidato: <%= number_to_currency_br(@deputy.spents.pluck(:vlrLiquido).max) %></span>
       </div>
     </div>
   </div>
@@ -20,7 +21,7 @@
       <th>Documento Fiscal</th>
     </tr>
     <% @deputy.spents.each do |item| %>
-      <tr class="<%= 'biggest--value' if item.vlrLiquido == @deputy.spents.pluck(:vlrLiquido).max %>">
+      <tr id="<%= 'biggest--value' if item.vlrLiquido == @deputy.spents.pluck(:vlrLiquido).max %>">
         <td><%= item.txtFornecedor %></td>
         <td><%= number_to_currency_br(item.vlrLiquido) %></td>
         <td><%= date_to_br_date(item.datEmissao) %></td>
