@@ -1,32 +1,35 @@
 <section class="container">
-  <div class="dashboard-show">
-    <%= image_tag(@deputy.avatar, alt: @deputy.tx_nome_parlamentar) %>
-    <div class="dashboard-show__info">
-      <strong><%= @deputy.tx_nome_parlamentar %></strong>
-      <div class="dashboard-show__info-spent">
-        <div>
-          <span>Total de gastos</span>
-          <span>$</span>
+  <div class="show-content">
+    <h1>Dados do Candidato</h1>
+    <div class="dashboard-show">
+      <%= image_tag(@deputy.avatar, alt: @deputy.tx_nome_parlamentar) %>
+      <div class="dashboard-show__info">
+        <strong><%= @deputy.tx_nome_parlamentar %></strong>
+        <div class="dashboard-show__info-spent">
+          <div>
+            <span>Total de gastos</span>
+            <span>$</span>
+          </div>
+          <p><%= number_to_currency_br(@deputy.spents.sum(:vlr_liquido)) %></p>
+          <span class="dashboard__biggest-spent">Maior despesa do candidato: <%= number_to_currency_br(@deputy.spents.pluck(:vlr_liquido).max) %></span>
         </div>
-        <p><%= number_to_currency_br(@deputy.spents.sum(:vlr_liquido)) %></p>
-        <span class="dashboard__biggest-spent">Maior despesa do candidato: <%= number_to_currency_br(@deputy.spents.pluck(:vlr_liquido).max) %></span>
       </div>
     </div>
-  </div>
-  <table>
-    <tr>
-      <th>Fornecedor</th>
-      <th>Valor Líquido</th>
-      <th>Data de Emissão</th>
-      <th>Documento Fiscal</th>
-    </tr>
-    <% @deputy.spents.each do |item| %>
-      <tr id="<%= 'biggest--value' if item.vlr_liquido == @deputy.spents.pluck(:vlr_liquido).max %>">
-        <td><%= item.txt_fornecedor %></td>
-        <td><%= number_to_currency_br(item.vlr_liquido) %></td>
-        <td><%= date_to_br_date(item.dat_emissao) %></td>
-        <td><%= link_to "Nota Fiscal", item.url_documento, class: "dashboard-btn__document", target: :_blank %></td>
+    <table>
+      <tr>
+        <th>Fornecedor</th>
+        <th>Valor Líquido</th>
+        <th>Data de Emissão</th>
+        <th>Documento Fiscal</th>
       </tr>
-    <% end %>
-  </table>
+      <% @deputy.spents.each do |item| %>
+        <tr id="<%= 'biggest--value' if item.vlr_liquido == @deputy.spents.pluck(:vlr_liquido).max %>">
+          <td><%= item.txt_fornecedor %></td>
+          <td><%= number_to_currency_br(item.vlr_liquido) %></td>
+          <td><%= date_to_br_date(item.dat_emissao) %></td>
+          <td><%= link_to "Nota Fiscal", item.url_documento, class: "dashboard-btn__document", target: :_blank %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </section>
