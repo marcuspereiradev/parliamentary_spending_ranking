@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+window.addEventListener("turbolinks:load", function () {
   var mybutton = document.getElementById("myBtn");
 
   window.onscroll = function () {
@@ -10,9 +10,9 @@ window.addEventListener("load", function () {
       document.body.scrollTop > 300 ||
       document.documentElement.scrollTop > 300
     ) {
-      mybutton.style.display = "block";
+      mybutton.style.opacity = "1";
     } else {
-      mybutton.style.display = "none";
+      mybutton.style.opacity = "0";
     }
   }
 

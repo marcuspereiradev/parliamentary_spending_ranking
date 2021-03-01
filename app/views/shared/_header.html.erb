@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar">
     <div class="container navbar__content">
-      <%= form_with url: dashboard_index_path, method: :get do |f| %>
+      <%= form_with url: dashboard_index_path, method: :get, remote: true do |f| %>
         <%= f.text_field :q %>
         <%= f.submit :Buscar%>
       <% end %>
