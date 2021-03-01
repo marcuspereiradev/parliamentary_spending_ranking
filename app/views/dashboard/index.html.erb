@@ -8,10 +8,10 @@
     <% else %>
       <% @deputies.each do |deputy| %>
         <%= link_to dashboard_path(deputy), class: "dashboard__deputy" do %>
-          <%= image_tag(deputy.avatar, alt: deputy.txNomeParlamentar) %>
+          <%= image_tag(deputy.avatar, alt: deputy.tx_nome_parlamentar) %>
           <div>
-            <strong><%= deputy.txNomeParlamentar %></strong>
-            <p>Patido pelo qual exerce mandato: <%= deputy.sgPartido%> - <%= deputy.sgUF %></p>
+            <strong><%= deputy.tx_nome_parlamentar %></strong>
+            <p>Patido pelo qual exerce mandato: <%= deputy.sg_partido%> - <%= deputy.sg_uf %></p>
           </div>
         <% end %>
       <% end %>

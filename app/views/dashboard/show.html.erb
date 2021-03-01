@@ -1,15 +1,15 @@
 <section class="container">
   <div class="dashboard-show">
-    <%= image_tag(@deputy.avatar, alt: @deputy.txNomeParlamentar) %>
+    <%= image_tag(@deputy.avatar, alt: @deputy.tx_nome_parlamentar) %>
     <div class="dashboard-show__info">
-      <strong><%= @deputy.txNomeParlamentar %></strong>
+      <strong><%= @deputy.tx_nome_parlamentar %></strong>
       <div class="dashboard-show__info-spent">
         <div>
           <span>Total de gastos</span>
           <span>$</span>
         </div>
-        <p><%= number_to_currency_br(@deputy.spents.sum(:vlrLiquido)) %></p>
-        <span class="dashboard__biggest-spent">Maior despesa do candidato: <%= number_to_currency_br(@deputy.spents.pluck(:vlrLiquido).max) %></span>
+        <p><%= number_to_currency_br(@deputy.spents.sum(:vlr_liquido)) %></p>
+        <span class="dashboard__biggest-spent">Maior despesa do candidato: <%= number_to_currency_br(@deputy.spents.pluck(:vlr_liquido).max) %></span>
       </div>
     </div>
   </div>
@@ -21,11 +21,11 @@
       <th>Documento Fiscal</th>
     </tr>
     <% @deputy.spents.each do |item| %>
-      <tr id="<%= 'biggest--value' if item.vlrLiquido == @deputy.spents.pluck(:vlrLiquido).max %>">
-        <td><%= item.txtFornecedor %></td>
-        <td><%= number_to_currency_br(item.vlrLiquido) %></td>
-        <td><%= date_to_br_date(item.datEmissao) %></td>
-        <td><%= link_to "Nota Fiscal", item.urlDocumento, class: "dashboard-btn__document", target: :_blank %></td>
+      <tr id="<%= 'biggest--value' if item.vlr_liquido == @deputy.spents.pluck(:vlr_liquido).max %>">
+        <td><%= item.txt_fornecedor %></td>
+        <td><%= number_to_currency_br(item.vlr_liquido) %></td>
+        <td><%= date_to_br_date(item.dat_emissao) %></td>
+        <td><%= link_to "Nota Fiscal", item.url_documento, class: "dashboard-btn__document", target: :_blank %></td>
       </tr>
     <% end %>
   </table>

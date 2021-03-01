@@ -10,28 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_26_174025) do
+ActiveRecord::Schema.define(version: 2021_03_01_155109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "deputies", force: :cascade do |t|
-    t.string "ideCadastro"
-    t.string "txNomeParlamentar"
-    t.string "sgUF"
-    t.string "sgPartido"
+    t.string "ide_cadastro"
+    t.string "tx_nome_parlamentar"
+    t.string "sg_uf"
+    t.string "sg_partido"
     t.string "avatar"
-    t.string "avatarCongresso"
+    t.string "avatar_congresso"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "spents", force: :cascade do |t|
     t.bigint "deputy_id", null: false
-    t.float "vlrLiquido"
-    t.string "txtFornecedor"
-    t.string "urlDocumento"
-    t.datetime "datEmissao"
+    t.float "vlr_liquido"
+    t.string "txt_fornecedor"
+    t.string "url_documento"
+    t.datetime "dat_emissao"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deputy_id"], name: "index_spents_on_deputy_id"

@@ -1,5 +1,5 @@
 class Spent < ApplicationRecord
   belongs_to :deputy
 
-  validates :vlrLiquido, presence: true
+  validates :vlr_liquido, presence: true
 end
