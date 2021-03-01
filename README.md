@@ -16,11 +16,11 @@
 </p>
 
 <p align="center">
-  <img src = "./.github/dashboard-show.gif" width=800>
+  <img src = "./.github/dashboardshow.gif" width=800>
 </p>
 
 <p align="center">
-  <img src = "./.github/Import.gif" width=800>
+  <img src = "./.github/import.gif" width=800>
 </p>
 
 ## Installation
