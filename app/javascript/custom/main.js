@@ -1,4 +1,4 @@
-window.addEventListener("turbolinks:load", function () {
+document.addEventListener("turbolinks:load", function () {
   var mybutton = document.getElementById("myBtn");
 
   window.onscroll = function () {

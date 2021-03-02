@@ -7,7 +7,7 @@
       </h2>
     <% else %>
       <% @deputies.each do |deputy| %>
-        <%= link_to dashboard_path(deputy), class: "dashboard__deputy" do %>
+        <%= link_to dashboard_path(deputy), class: "dashboard__deputy", data: { no_turbolink: true } do %>
           <%= image_tag(deputy.avatar, alt: deputy.tx_nome_parlamentar) %>
           <div>
             <strong><%= deputy.tx_nome_parlamentar %></strong>

@@ -27,7 +27,7 @@
           <td><%= item.txt_fornecedor %></td>
           <td><%= number_to_currency_br(item.vlr_liquido) %></td>
           <td><%= date_to_br_date(item.dat_emissao) %></td>
-          <td><%= link_to "Nota Fiscal", item.url_documento, class: "dashboard-btn__document", target: :_blank %></td>
+          <td><%= link_to "Nota Fiscal", item.url_documento, data: { no_turbolink: true }, class: "dashboard-btn__document", target: :_blank %></td>
         </tr>
       <% end %>
     </table>
