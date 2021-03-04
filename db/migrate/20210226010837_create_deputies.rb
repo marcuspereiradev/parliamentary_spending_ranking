@@ -9,6 +9,8 @@ class CreateDeputies < ActiveRecord::Migration[6.1]
       t.string :avatarCongresso
 
       t.timestamps
+
+      t.index [:ideCadastro, :txNomeParlamentar], unique: true
     end
   end
 end
