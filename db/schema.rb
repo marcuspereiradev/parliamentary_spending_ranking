@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_155109) do
     t.string "avatar_congresso"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ide_cadastro", "tx_nome_parlamentar"], name: "index_deputies_on_ide_cadastro_and_tx_nome_parlamentar", unique: true
   end
 
   create_table "spents", force: :cascade do |t|

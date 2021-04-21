@@ -1,13 +1,13 @@
 <header>
   <nav class="navbar">
     <div class="container navbar__content">
-      <%= form_with url: dashboard_index_path, method: :get do |f| %>
+      <%= form_with url: dashboard_index_path, method: :get, remote: true do |f| %>
         <%= f.text_field :q %>
         <%= f.submit :Buscar%>
       <% end %>
       <ul class="navbar__list">
-        <li><%= link_to  "Listagem", dashboard_index_path, class: "navbar__link" %></li>
-        <li><%= link_to  "Importar", csv_import_index_path, class: "navbar__link" %></li>
+        <li><%= link_to  "Listagem", dashboard_index_path, class: "navbar__link", data: { turbolinks: false } %></li>
+        <li><%= link_to  "Importar", csv_import_index_path, class: "navbar__link", data: { turbolinks: false } %></li>
       </ul>
     </div>
   </nav>
