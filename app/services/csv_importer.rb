@@ -1,9 +1,8 @@
 require 'csv'
 class CsvImporter
   def self.import(file)
-    path = file.tempfile.path
-    clean_csv = File.read(path).delete('"')
-    csv = CSV.parse(clean_csv, headers: true, header_converters: -> (f) {f.gsub(/[^0-9A-Za-z]/, '')}, col_sep: ';')
+    cleaned_csv = File.read(file).delete('"')
+    csv = CSV.parse(cleaned_csv, headers: true, header_converters: -> (f) {f.gsub(/[^0-9A-Za-z]/, '')}, col_sep: ';')
 
     csv_hash = []
 
@@ -15,6 +14,8 @@ class CsvImporter
 
     self.create_deputy(rj_only)
     self.create_spent_of_deputy(rj_only)
+
+    File.delete(file)
   end
 
   private
