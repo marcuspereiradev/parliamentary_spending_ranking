@@ -56,3 +56,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "dotenv-rails", "~> 2.7", groups: [:development, :test]
+
+gem "sidekiq", "~> 6.2"
+
+gem "redis", "~> 4.2"
