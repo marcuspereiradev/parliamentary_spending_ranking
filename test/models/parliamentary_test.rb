@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DeputyTest < ActiveSupport::TestCase
+class ParliamentaryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

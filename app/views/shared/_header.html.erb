@@ -8,6 +8,7 @@
       <ul class="navbar__list">
         <li><%= link_to  "Listagem", dashboard_index_path, class: "navbar__link", data: { turbolinks: false } %></li>
         <li><%= link_to  "Importar", csv_import_index_path, class: "navbar__link", data: { turbolinks: false } %></li>
+        <li><%= link_to "Baixar Csv", "https://dadosabertos.camara.leg.br/swagger/api.html#staticfile", class: "navbar__link", target: :_blank %></li>
       </ul>
     </div>
   </nav>

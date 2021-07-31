@@ -1,5 +1,3 @@
 class Spent < ApplicationRecord
-  belongs_to :deputy
-
-  validates :vlr_liquido, presence: true
+  belongs_to :parliamentary
 end

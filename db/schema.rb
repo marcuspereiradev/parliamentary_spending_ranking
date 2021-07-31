@@ -10,33 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_155109) do
-
+ActiveRecord::Schema.define(version: 20_210_724_203_651) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "deputies", force: :cascade do |t|
-    t.string "ide_cadastro"
-    t.string "tx_nome_parlamentar"
-    t.string "sg_uf"
-    t.string "sg_partido"
-    t.string "avatar"
-    t.string "avatar_congresso"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ide_cadastro", "tx_nome_parlamentar"], name: "index_deputies_on_ide_cadastro_and_tx_nome_parlamentar", unique: true
+  create_table 'parliamentaries', force: :cascade do |t|
+    t.string 'tx_nome_parlamentar'
+    t.string 'ide_cadastro'
+    t.string 'sg_uf'
+    t.string 'sg_partido'
+    t.string 'avatar'
+    t.string 'avatar_congresso'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "spents", force: :cascade do |t|
-    t.bigint "deputy_id", null: false
-    t.float "vlr_liquido"
-    t.string "txt_fornecedor"
-    t.string "url_documento"
-    t.datetime "dat_emissao"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["deputy_id"], name: "index_spents_on_deputy_id"
+  create_table 'spents', force: :cascade do |t|
+    t.string 'tx_nome_parlamentar'
+    t.string 'cpf'
+    t.string 'ide_cadastro'
+    t.string 'numero_carteira_parlamentar'
+    t.string 'number_legislatura'
+    t.string 'sg_uf'
+    t.string 'sg_partido'
+    t.string 'cod_legislatura'
+    t.string 'numero_sub_cota'
+    t.string 'txt_descricao'
+    t.string 'numero_especificacao_subcota'
+    t.string 'txt_descricao_especificacao'
+    t.string 'txt_fornecedor'
+    t.string 'txt_cnpj_cpf'
+    t.string 'txt_numero'
+    t.string 'ind_tipo_documento'
+    t.string 'dat_emissao'
+    t.float 'vlr_documento'
+    t.float 'vlr_glosa'
+    t.float 'vlr_liquido'
+    t.string 'num_mes'
+    t.string 'num_ano'
+    t.string 'num_parcela'
+    t.string 'txt_passageiro'
+    t.string 'txt_trecho'
+    t.string 'num_lote'
+    t.string 'num_ressarcimento'
+    t.string 'vlr_restituicao'
+    t.string 'nu_deputado_id'
+    t.string 'ide_documento'
+    t.string 'url_documento'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'parliamentary_id'
+    t.index ['parliamentary_id'], name: 'index_spents_on_parliamentary_id'
   end
-
-  add_foreign_key "spents", "deputies"
 end
