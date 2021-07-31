@@ -1,61 +1,83 @@
+# frozen_string_literal: true
 require 'csv'
+
+# Import CSV
 class CsvImporter
   def self.import(file)
     cleaned_csv = File.read(file).delete('"')
-    csv = CSV.parse(cleaned_csv, headers: true, header_converters: -> (f) {f.gsub(/[^0-9A-Za-z]/, '')}, col_sep: ';')
+    csv = CSV.parse(cleaned_csv, headers: true, header_converters: ->(f) { f.gsub(/[^0-9A-Za-z]/, '') }, col_sep: ';')
 
-    csv_hash = []
+    all_rj_data = csv.select { |row| row[5] == 'RJ' }
 
-    csv.each do |row|
-      csv_hash << row.to_h
+    parliamentarians = all_rj_data.map do |row|
+      {
+        'tx_nome_parlamentar' => row[0],
+        'cpf' => row[1],
+        'ide_cadastro' => row[2],
+        'numero_carteira_parlamentar' => row[3],
+        'number_legislatura' => row[4],
+        'sg_uf' => row[5],
+        'sg_partido' => row[6],
+        'cod_legislatura' => row[7],
+        'numero_sub_cota' => row[8],
+        'txt_descricao' => row[9],
+        'numero_especificacao_subcota' => row[10],
+        'txt_descricao_especificacao' => row[11],
+        'txt_fornecedor' => row[12],
+        'txt_cnpj_cpf' => row[13],
+        'txt_numero' => row[14],
+        'ind_tipo_documento' => row[15],
+        'dat_emissao' => row[16],
+        'vlr_documento' => row[17],
+        'vlr_glosa' => row[18],
+        'vlr_liquido' => row[19],
+        'num_mes' => row[20],
+        'num_ano' => row[21],
+        'num_parcela' => row[22],
+        'txt_passageiro' => row[23],
+        'txt_trecho' => row[24],
+        'num_lote' => row[25],
+        'num_ressarcimento' => row[26],
+        'vlr_restituicao' => row[27],
+        'nu_deputado_id' => row[28],
+        'ide_documento' => row[29],
+        'url_documento' => row[30],
+        'avatar' => "https://www.camara.leg.br/internet/deputado/bandep/#{row[2]}.jpgmaior.jpg",
+        'avatar_congresso' => "https://www.camara.leg.br/internet/deputado/bandep/pagina_do_deputado/#{row[2]}.jpg"
+      }
     end
 
-    rj_only = csv_hash.select{ |row| row['sgUF'] == 'RJ' }
+    create_deputy(parliamentarians)
 
-    self.create_deputy(rj_only)
-    self.create_spent_of_deputy(rj_only)
+    create_spents(parliamentarians)
 
     File.delete(file)
   end
 
-  private
+  class << self
+    def create_deputy(parliamentarians)
+      parliamentarians.uniq { |row| row['tx_nome_parlamentar'] && row['ide_cadastro'] }
 
-  def self.create_deputy(data)
-    deputy_data = data.map do |hash|
-      hash["tx_nome_parlamentar"] = hash.delete("txNomeParlamentar")
-      hash["ide_cadastro"] = hash.delete("ideCadastro")
-      hash["sg_uf"] = hash.delete("sgUF")
-      hash["sg_partido"] = hash.delete("sgPartido")
+      parliamentarians.each do |parliamentary|
+        parliamentary = {
+          'tx_nome_parlamentar': parliamentary['tx_nome_parlamentar'],
+          'ide_cadastro': parliamentary['ide_cadastro'],
+          'sg_uf': parliamentary['sg_uf'],
+          'sg_partido': parliamentary['sg_partido'],
+          'avatar': parliamentary['avatar'],
+          'avatar_congresso': parliamentary['avatar_congresso']
+        }
 
-      hashes_from_outside_the_csv = {
-        "avatar" => "https://www.camara.leg.br/internet/deputado/bandep/#{hash["ide_cadastro"]}.jpgmaior.jpg",
-        "avatar_congresso" => "https://www.camara.leg.br/internet/deputado/bandep/pagina_do_deputado/#{hash["ide_cadastro"]}.jpg",
-        "created_at" => Time.current,
-        "updated_at" => Time.current
-      }
-
-      hash.slice("tx_nome_parlamentar", "ide_cadastro", "sg_uf", "sg_partido")
-          .merge(hashes_from_outside_the_csv)
+        Parliamentary.find_or_create_by(parliamentary)
+      end
     end
-    Deputy.insert_all(deputy_data)
-  end
 
-  def self.create_spent_of_deputy(data)
-    deputy_data = data.map do |hash|
-      hash["vlr_liquido"] = hash.delete("vlrLiquido")
-      hash["txt_fornecedor"] = hash.delete("txtFornecedor")
-      hash["url_documento"] = hash.delete("urlDocumento")
-      hash["dat_emissao"] = hash.delete("datEmissao")
-
-      hashes_from_outside_the_csv = {
-        "deputy_id" => Deputy.find_by(ide_cadastro: hash["ide_cadastro"]).id,
-        "created_at" => Time.current,
-        "updated_at" => Time.current
-      }
-
-      hash.slice("vlr_liquido", "txt_fornecedor", "url_documento", "dat_emissao")
-          .merge(hashes_from_outside_the_csv)
+    def create_spents(parliamentarians)
+      parliamentarians.each do |parliamentary|
+        spent = Spent.find_or_initialize_by(parliamentary.except('avatar', 'avatar_congresso'))
+        spent['parliamentary_id'] = Parliamentary.find_by(ide_cadastro: parliamentary['ide_cadastro']).id
+        spent.save
+      end
     end
-    Spent.insert_all(deputy_data)
   end
 end
