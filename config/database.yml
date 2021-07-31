@@ -88,3 +88,6 @@ production:
   database: parliamentary_spending_ranking_production
   username: parliamentary_spending_ranking
   password: <%= ENV['PARLIAMENTARY_SPENDING_RANKING_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  SIDEKIQ_USERNAME: <%= ENV['SIDEKIQ_USERNAME'] %>
+  SIDEKIQ_PASSWORD: <%= ENV['SIDEKIQ_PASSWORD'] %>
