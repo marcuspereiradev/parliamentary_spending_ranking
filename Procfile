@@ -1,1 +1,1 @@
-worker: bundle exec sidekiq -c 2
+worker: bundle exec sidekiq -q import_csv -c 8
