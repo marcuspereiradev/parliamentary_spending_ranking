@@ -58,8 +58,7 @@ class CsvImporter
     end
 
     def create_spents(parliamentary_saved, spents)
-      spent = parliamentary_saved.spents.find_or_initialize_by(spents)
-      spent.save
+      parliamentary_saved.spents.create(spents)
     end
   end
 end
