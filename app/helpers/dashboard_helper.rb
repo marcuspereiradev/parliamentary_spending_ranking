@@ -1,6 +1,6 @@
 module DashboardHelper
   def number_to_currency_br(value)
-    number_to_currency(value, :unit => 'R$ ', :separator => ',', :delimiter => '.')
+    number_to_currency(value, unit: 'R$ ', separator: ',', delimiter: '.')
   end
 
   def date_to_br_date(date)
