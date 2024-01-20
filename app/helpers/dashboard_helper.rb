@@ -8,12 +8,25 @@ module DashboardHelper
   end
 
   def most_spent_supplier
-    max_value = @deputy.spents.max_by(&:vlr_liquido).vlr_liquido
-    suppliers = @deputy.spents.where("vlr_liquido = #{max_value}")
+    supplier_name = search_supplier_name
+    biggest_spent = search_biggest_spent(supplier_name)
 
     {
-      'suppliers' => suppliers,
-      'biggest_spent' => suppliers.count * max_value
+      name: supplier_name,
+      biggest_spent: biggest_spent
     }
+  end
+
+  def search_supplier_name
+    @deputy.spents
+           .select('txt_fornecedor, SUM(vlr_liquido) as total_spent')
+           .group(:txt_fornecedor)
+           .order('total_spent DESC')
+           .first
+           .txt_fornecedor
+  end
+
+  def search_biggest_spent(supplier_name)
+    @deputy.spents.where('txt_fornecedor LIKE ?', "%#{supplier_name}%").pluck(:vlr_liquido).sum
   end
 end
