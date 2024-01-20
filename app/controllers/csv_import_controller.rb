@@ -10,7 +10,7 @@ class CsvImportController < ApplicationController
     if csv_valid?
       app_temp_file_path = build_csv_file_path
 
-      ImportCsvJob.perform_now(app_temp_file_path)
+      ImportCsvJob.perform_later(app_temp_file_path)
 
       redirect_to root_path
       return flash[:alert] = 'Aguarde enquanto importamos os dados...'
