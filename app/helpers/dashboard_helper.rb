@@ -8,14 +8,12 @@ module DashboardHelper
   end
 
   def most_spent_supplier
-    all_suppliers = @deputy.spents.pluck(:txt_fornecedor).uniq
-    supplier_that_paid_more = all_suppliers.map do |supplier|
-      {
-        'supplier' => supplier,
-        'total_spent' => @deputy.spents.where(txt_fornecedor: supplier).pluck(:vlr_liquido).sum
-      }
-    end
+    max_value = @deputy.spents.max_by(&:vlr_liquido).vlr_liquido
+    suppliers = @deputy.spents.where("vlr_liquido = #{max_value}")
 
-    @teste = supplier_that_paid_more.max_by { |supplier| supplier['total_spent'] }
+    {
+      'suppliers' => suppliers,
+      'biggest_spent' => suppliers.count * max_value
+    }
   end
 end
