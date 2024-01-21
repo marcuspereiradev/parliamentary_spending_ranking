@@ -15,6 +15,8 @@ class CsvImporter
 
   class << self
     def save_csv_data(csv)
+      Parliamentary.destroy_all
+
       csv.each do |row|
         next unless row[5] == 'RJ'
 
