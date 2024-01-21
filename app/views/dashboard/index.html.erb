@@ -1,17 +1,17 @@
 <section class="container dashboard-container">
   <h1 class="dashboard__title">Ranking dos gastos dos Deputados do Rio de Janeiro</h1>
-  <div class="dashboard__deputy-content">
+  <div class="dashboard__parliamentary-content">
     <% if @deputies.empty? %>
       <h2 class="dashboard__title-empty">
         Não há registros no momento. Baixe o <%= link_to "CSV", "https://dadosabertos.camara.leg.br/swagger/api.html#staticfile", target: :_blank %> e <%= link_to  "Importe o arquivo", csv_import_index_path %>.
       </h2>
     <% else %>
-      <% @deputies.each do |deputy| %>
-        <%= link_to dashboard_path(deputy), class: "dashboard__deputy" do %>
-          <%= image_tag(deputy.avatar, alt: deputy.tx_nome_parlamentar) %>
+      <% @deputies.each do |parliamentary| %>
+        <%= link_to dashboard_path(parliamentary), class: "dashboard__parliamentary" do %>
+          <%= image_tag(parliamentary.avatar, alt: parliamentary.tx_nome_parlamentar) %>
           <div>
-            <strong><%= deputy.tx_nome_parlamentar %></strong>
-            <p>Patido pelo qual exerce mandato: <%= deputy.sg_partido%> - <%= deputy.sg_uf %></p>
+            <strong><%= parliamentary.tx_nome_parlamentar %></strong>
+            <p>Patido pelo qual exerce mandato: <%= parliamentary.sg_partido%> - <%= parliamentary.sg_uf %></p>
           </div>
         <% end %>
       <% end %>

@@ -20,7 +20,7 @@ module DashboardHelper
   end
 
   def search_supplier
-    @deputy.spents
+    @parliamentary.spents
            .group('LOWER(txt_fornecedor)')
            .order('SUM(vlr_liquido) DESC')
            .pluck('LOWER(txt_fornecedor)', 'SUM(vlr_liquido)')

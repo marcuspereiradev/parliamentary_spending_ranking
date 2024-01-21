@@ -12,6 +12,6 @@ class DashboardController < ApplicationController
   end
 
   def show
-    @deputy = Parliamentary.find(params[:id])
+    @parliamentary = Parliamentary.find(params[:id])
   end
 end

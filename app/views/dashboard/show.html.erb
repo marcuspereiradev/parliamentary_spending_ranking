@@ -2,15 +2,15 @@
   <div class="show-content">
     <h1>Dados do Candidato</h1>
     <div class="dashboard-show">
-      <%= image_tag(@deputy.avatar, alt: @deputy.tx_nome_parlamentar) %>
+      <%= image_tag(@parliamentary.avatar, alt: @parliamentary.tx_nome_parlamentar) %>
       <div class="dashboard-show__info">
-        <strong><%= @deputy.tx_nome_parlamentar %></strong>
+        <strong><%= @parliamentary.tx_nome_parlamentar %></strong>
         <div class="dashboard-show__info-spent">
           <div>
             <span>Total de gastos</span>
             <span>$</span>
           </div>
-          <p><%= number_to_currency_br(@deputy.total_spents) %></p>
+          <p><%= number_to_currency_br(@parliamentary.total_spents) %></p>
           <span class="dashboard__biggest-spent">Maior despesa do candidato: <%= number_to_currency_br(most_spent_supplier()[:biggest_spent]) %></span>
         </div>
       </div>
@@ -22,7 +22,7 @@
         <th>Data de Emissão</th>
         <th>Documento Fiscal</th>
       </tr>
-      <% @deputy.spents.each do |item| %>
+      <% @parliamentary.spents.each do |item| %>
         <tr id="<%= 'biggest--value' if most_spent_supplier()[:name].upcase == item.txt_fornecedor.upcase %>">
           <td><%= item.txt_fornecedor %></td>
           <td><%= number_to_currency_br(item.vlr_liquido) %></td>
