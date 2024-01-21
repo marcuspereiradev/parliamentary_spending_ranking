@@ -12,8 +12,8 @@ class CsvImportController < ApplicationController
 
       ImportCsvJob.perform_later(app_temp_file_path)
 
-      redirect_to root_path
-      return flash[:alert] = 'Aguarde enquanto importamos os dados...'
+      redirect_to csv_import_index_path
+      return flash[:alert] = 'Os dados estão sendo salvos. Você pode continuar navegando pelo site.'
     end
 
     redirect_to csv_import_index_path, alert: 'Você precisa escolher um arquivo CSV.'

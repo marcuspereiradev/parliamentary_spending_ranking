@@ -3,15 +3,16 @@
 # DashboardController
 class DashboardController < ApplicationController
   def index
-    if params[:q]
-      @parliamentarians = Parliamentary.where('tx_nome_parlamentar ILIKE ?', "%#{params[:q]}%")
-      if params[:q].empty? || @parliamentarians.empty?
-        redirect_to root_path,
-                    alert: 'Não foi possível encontrar o candidato solicitado'
-      end
-    else
+    unless params[:q]
       @parliamentarians = Parliamentary.all
+      return @parliamentarians
     end
+
+    @parliamentarians = Parliamentary.where('tx_nome_parlamentar ILIKE ?', "%#{params[:q]}%")
+
+    return @parliamentarians if @parliamentarians.present?
+
+    redirect_to root_path, alert: 'Não foi possível encontrar o candidato solicitado'
   end
 
   def show
