@@ -1,14 +1,14 @@
 <h1 align="center">
-  Ranking of the Deputies expense of Rio de Janeiro
+  Ranking of the parliamentarians expense of Rio de Janeiro
 </h1>
 
 <p align="center">Project made with Ruby On Rails, SASS and Postgresql.</p>
 
 ##  Features
 
-* List all deputies in Rio de Janeiro.
+* List all parliamentarians in Rio de Janeiro.
 * Show and highlight them main spents.
-* Import CSV file with the data of this deputies.
+* Import CSV file with the data of this parliamentarians.
 * You can download the CSV file in: [CSV File](https://dadosabertos.camara.leg.br/swagger/api.html#staticfile)
 
 <p align="center">
